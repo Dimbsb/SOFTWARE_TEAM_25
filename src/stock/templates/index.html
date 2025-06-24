@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stock Prediction</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+  <div class="container">
+    <div class="logo animate__animated animate__fadeInDown">
+      <span class="icon">🪙</span> SMAS <span class="subtitle">(Stock Forecast)</span>
+    </div>
+
+    {% if message %}
+    <div class="message animate__animated animate__fadeIn">{{ message }}</div>
+    {% endif %}
+
+    <div class="main-content">
+      <div class="left-panel">
+        <div class="card animate__animated animate__fadeInLeft">
+          <h3>🚀 Upload Dataset</h3>
+          <form method="post" class="upload-form">
+            <label for="ticker">Ticker Symbol:</label>
+            <input type="text" name="ticker" id="ticker" placeholder="e.g. AAPL, TSLA" required>
+            <label for="start_date">Start Date:</label>
+            <input type="date" name="start_date" id="start_date" value="2022-01-01">
+            <label for="end_date">End Date:</label>
+            <input type="date" name="end_date" id="end_date">
+            <button type="submit">🔍 Run Analysis</button>
+          </form>
+        </div>
+
+        {% if datasets %}
+        <div class="card animate__animated animate__fadeInLeft">
+          <h3>📂 Uploaded Datasets</h3>
+          <ul>
+            {% for ds in datasets %}
+              <li>
+                <span class="dataset-name">{{ ds.name }}</span>
+                <form method="post" class="inline-form" style="display:inline;">
+                  <input type="hidden" name="delete" value="{{ ds.name }}">
+                  <button type="submit" class="delete-btn" title="Delete Dataset">🗑️</button>
+                </form>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="right-panel">
+        {% if result %}
+        <div class="card animate__animated animate__fadeInUp">
+          <h3>📊 Analysis Result</h3>
+          <div class="result">{{ result | safe }}</div>
+          <div class="result">
+
+
+            <img src="/static/plot.png" class="result-img">
+          </div>
+          <div class="download-block">
+            <a href="{{ url_for('static', filename='forecast_report.zip') }}" download="forecast_report.zip">
+              <button class="download-btn">📦 Download Results (.zip)</button>
+            </a>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="footer">
+          <p>&copy; TEAM_25 All rights reserved.</p>
+      <br>
+      <span class="footer-links">
+        <a href="https://finance.yahoo.com" target="_blank" class="yahoo-link">Yahoo Finance</a>
+        <span class="separator">|</span>
+      Made with <span class="star">&#11088;</span> Flask &amp; LSTM &middot; <span class="star">2025</span>
+      <br>
+      <span class="footer-quote">Invest smart.</span>
+    </div>
+  </div>
+
+ 
+</body>
+</html>
