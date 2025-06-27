@@ -72,7 +72,7 @@ class Analysis:
         ax.set_facecolor('#2c2f33')
 
         # Ιστορικά
-        ax.plot(last_dates, last_60, color='#ffd700', label="Ιστορικά Δεδομένα", linewidth=2.2)
+        ax.plot(last_dates, last_60, color='#ffd700', label="Past", linewidth=2.2)
 
         # Short-term πρόβλεψη (μία μέρα)
         ax.plot([last_dates[-1], next_date], [last_real_price, predicted_price],
@@ -85,8 +85,8 @@ class Analysis:
         ax.fill_between(future_dates, forecast_worst, forecast_best, color='gray', alpha=0.2, label="Uncertainty Band")
 
         ax.set_title(f"Stock Price Forecast ({self.dataset.ticker})", fontsize=14, color='#fffbe6')
-        ax.set_xlabel("Ημερομηνία", fontsize=12, color='#ffd700')
-        ax.set_ylabel("Τιμή ($)", fontsize=12, color='#ffd700')
+        ax.set_xlabel("Date", fontsize=12, color='#ffd700')
+        ax.set_ylabel("Close price ($)", fontsize=12, color='#ffd700')
         ax.tick_params(colors='#fffbe6')
         ax.grid(True, linestyle='--', alpha=0.3)
         ax.legend()
