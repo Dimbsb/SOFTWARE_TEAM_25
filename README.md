@@ -1,4 +1,5 @@
 # SOFTWARE_TEAM_25
+## STOCK MARKET ANALYSIS SYSTEM
 
 Welcome to the **SOFTWARE_TEAM_25** repository! This project serves as a collaborative space for the team to develop and manage software solutions. Below, you'll find useful information about the project, its purpose, and how to get started.
 
